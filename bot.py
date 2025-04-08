@@ -1,11 +1,14 @@
 from telegram.ext import ApplicationBuilder
 from handlers.telegram import TelegramHandlers
+import os
+from dotenv import load_dotenv
 
-TOKEN = "7503912901:AAGZ7K9XGrOcGvXYea6s50yvzpht4E7EfWI"
+load_dotenv()
 
 class Bot:
     def __init__(self):
-        self.app = ApplicationBuilder().token(TOKEN).build()
+        self.token = os.getenv("BOT_TOKEN")
+        self.app = ApplicationBuilder().token(self.token).build()
         self.handlers = TelegramHandlers()
 
     def setup_handlers(self):
